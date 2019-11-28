@@ -242,27 +242,51 @@ void setColor(int forground, int background)
 
 
 int keyControl(void) {
-	char temp = _getch();
-
-	if (temp == 'w' || temp == 'W')
+	int temp;
+	temp= _getch();
+	if (temp == 224)
 	{
-		return UP;
+		temp = _getch();
+		switch (temp) 
+		{
+			case 72:
+				return UP;
+				break;
+			case 75:
+				return LEFT;
+				break;
+			case 77:
+				return RIGHT;
+				break;
+			case 80:
+				return DOWN;
+				break;
+			default:
+				break;
+		}
 	}
-	else if (temp == 'a' || temp == 'A')
+	else
 	{
-		return LEFT;
-	}
-	else if (temp == 's' || temp == 'S')
-	{
-		return DOWN;
-	}
-	else if (temp == 'd' || temp == 'D')
-	{
-		return RIGHT;
-	}
-	else if (temp == ' ')
-	{ // 스페이스바(공백)이 선택 버튼  
-		return SUBMIT;
+		if (temp == 119 || temp == 87)
+		{
+			return UP;
+		}
+		else if (temp == 97 || temp == 65)
+		{
+			return LEFT;
+		}
+		else if (temp == 115 || temp == 83)
+		{
+			return DOWN;
+		}
+		else if (temp == 100 || temp == 68)
+		{
+			return RIGHT;
+		}
+		else if (temp == ' ')
+		{ // 스페이스바(공백)이 선택 버튼  
+			return SUBMIT;
+		}
 	}
 }
 
@@ -283,11 +307,7 @@ void ClearDraw(void) {
 	printf("              ##          ##        #######    #   ##    ########     ##   \n");
 	printf("              ##          ##        ##        ########   ##    ##          \n");
 	printf("                ######   #########  ######## #       ##  ##     ##    ##   \n");
-	while (1) {
-		if (keyControl() == SUBMIT) {
-			break;
-		}
-	}
+	Sleep(1000);
 }
 
 void EndDraw(void) {
@@ -298,11 +318,7 @@ void EndDraw(void) {
 	printf("              ##     ########  #######       #######   ## ### ##  ##    ##  \n");
 	printf("              ##     ##    ##  ##            ##        ##  #####  ##    ##  \n");
 	printf("              ##     ##    ##  ########      ########  ##     ##  #######   \n");
-	while (1) {
-		if (keyControl() == SUBMIT) {
-			break;
-		}
-	}
+	Sleep(1000);
 }
 
 int menuDraw(void) {
